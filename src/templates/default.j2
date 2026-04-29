@@ -1,0 +1,66 @@
+# {{ module.path.split('/')[-1].replace('.py', '') }}
+
+{% if module.docstring %}
+{{ module.docstring.strip() }}
+{% endif %}
+
+{% if module.classes %}
+## Classes
+
+{% for cls in module.classes %}
+### {{ cls.name }}{% if cls.bases %}({{ cls.bases|join(', ') }}){% endif %}
+
+{% if cls.docstring %}
+{{ cls.docstring.strip() }}
+{% endif %}
+
+{% if cls.methods %}
+#### Methods
+
+{% for method in cls.methods %}
+##### `{{ method.name }}({{ method.args|format_args }}){% if method.returns %}{{ ' -> ' + method.returns }}{% endif %}`
+
+{% if method.docstring %}
+{{ method.docstring.strip() }}
+{% endif %}
+
+{% if method.args %}
+| Parameter | Type | Description |
+|-----------|------|-------------|
+{% for arg in method.args %}
+| `{{ arg.name }}` | {{ arg.annotation or 'any' }} | |
+{% endfor %}
+{% endif %}
+
+{% endfor %}
+{% endif %}
+
+---
+
+{% endfor %}
+{% endif %}
+
+{% if module.functions %}
+## Functions
+
+{% for func in module.functions %}
+### `{{ func.name }}({{ func.args|format_args }}){% if func.returns %}{{ ' -> ' + func.returns }}{% endif %}`
+
+{% if func.docstring %}
+{{ func.docstring.strip() }}
+{% endif %}
+
+{% if func.args %}
+| Parameter | Type | Description |
+|-----------|------|-------------|
+{% for arg in func.args %}
+| `{{ arg.name }}` | {{ arg.annotation or 'any' }} | |
+{% endfor %}
+{% endif %}
+
+---
+
+{% endfor %}
+{% endif %}
+
+{% endfor %}
