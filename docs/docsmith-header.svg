@@ -1,107 +1,94 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 220" role="img">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 220">
   <title>docsmith - Lightweight Docstring to Markdown Generator</title>
   <desc>A document icon with code brackets transforming into formatted markdown page layout</desc>
 
   <defs>
     <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#1a1a2e"/>
-      <stop offset="100%" style="stop-color:#16213e"/>
+      <stop offset="0%" stop-color="#1a1a2e"/>
+      <stop offset="100%" stop-color="#16213e"/>
     </linearGradient>
-    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#e94560"/>
-      <stop offset="100%" style="stop-color:#ff6b6b"/>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="0">
+      <stop offset="0%" stop-color="#e94560"/>
+      <stop offset="100%" stop-color="#ff6b6b"/>
     </linearGradient>
     <linearGradient id="docGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" style="stop-color:#f8f9fa"/>
-      <stop offset="100%" style="stop-color:#e9ecef"/>
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f0f0f0"/>
     </linearGradient>
-    <filter id="glow">
-      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
-      <feMerge>
-        <feMergeNode in="coloredBlur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
+    <filter id="shadow">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-color="#00000030"/>
     </filter>
   </defs>
 
-  <style>
-    .code-bracket { fill: none; stroke: #e94560; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
-    .code-content { fill: #ff6b6b; font-family: monospace; font-size: 14px; }
-    .doc-bg { fill: url(#docGrad); rx: 8; }
-    .doc-line { fill: #dee2e6; }
-    .doc-heading { fill: #495057; }
-    .md-hash { fill: #e94560; }
-    .md-bold { fill: #212529; font-weight: bold; }
-    .transform-arrow { fill: none; stroke: #adb5bd; stroke-width: 2; stroke-dasharray: 5,3; }
-    .arrow-head { fill: #adb5bd; }
-    .title-text { fill: #ffffff; font-weight: bold; }
-    .subtitle-text { fill: #adb5bd; }
-  </style>
-
   <!-- Background -->
-  <rect width="600" height="220" fill="url(#bgGrad)" rx="12"/>
+  <rect width="600" height="220" fill="url(#bgGrad)"/>
 
-  <!-- Code bracket icon (left side) -->
-  <g transform="translate(60, 50)">
-    <!-- Document shape with folded corner -->
-    <path d="M0 0 L40 0 L60 20 L60 100 L0 100 Z" fill="#2d3748"/>
-    <path d="M40 0 L40 20 L60 20" fill="#1a202c"/>
+  <!-- Left side: Code document with brackets -->
+  <g filter="url(#shadow)">
+    <!-- Document body -->
+    <rect x="40" y="45" width="120" height="130" fill="#2d3748" rx="6"/>
+    <!-- Folded corner -->
+    <path d="M120 45 L160 45 L160 85 L120 45" fill="#1a202c"/>
+    <path d="M120 45 L120 85 L160 85" fill="#4a5568"/>
+  </g>
 
-    <!-- Code brackets inside document -->
-    <path class="code-bracket" d="M15 30 L15 70 M25 35 L25 65"/>
-    <text x="17" y="52" class="code-content">{'a'}</text>
+  <!-- Code brackets { } inside document -->
+  <g stroke="#e94560" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Left bracket { -->
+    <path d="M65 70 Q55 90 65 110"/>
+    <path d="M75 75 L75 105"/>
+    <!-- Right bracket } -->
+    <path d="M125 70 Q135 90 125 110"/>
+    <path d="M115 75 L115 105"/>
+  </g>
 
-    <!-- Small function indicator -->
-    <rect x="10" y="75" width="40" height="4" fill="#4a5568" rx="2"/>
+  <!-- Code content lines inside document -->
+  <g fill="#718096">
+    <rect x="55" y="120" width="70" height="5" rx="2"/>
+    <rect x="55" y="132" width="50" height="5" rx="2"/>
+    <rect x="55" y="144" width="60" height="5" rx="2"/>
   </g>
 
   <!-- Transformation arrow -->
-  <g transform="translate(150, 80)">
-    <path class="transform-arrow" d="M0 20 Q40 20 80 20 L120 20"/>
-    <polygon points="120,15 135,20 120,25" class="arrow-head"/>
+  <g stroke="#64748b" stroke-width="2" fill="none">
+    <path d="M180 110 Q220 110 260 110" stroke-dasharray="6,4"/>
+    <polygon points="255,105 270,110 255,115" fill="#64748b"/>
   </g>
 
-  <!-- Markdown document (right side) -->
-  <g transform="translate(280, 35)">
-    <!-- Document background with shadow -->
-    <rect x="4" y="4" width="200" height="150" fill="#00000030" rx="6"/>
-    <rect x="0" y="0" width="200" height="150" fill="url(#docGrad)" rx="6" stroke="#dee2e6" stroke-width="1"/>
+  <!-- Right side: Markdown document -->
+  <g filter="url(#shadow)">
+    <!-- Document shadow -->
+    <rect x="294" y="39" width="240" height="160" fill="#00000020" rx="8"/>
+    <!-- Document body -->
+    <rect x="290" y="35" width="240" height="160" fill="url(#docGrad)" rx="8" stroke="#e2e8f0" stroke-width="1"/>
+  </g>
 
-    <!-- Document header -->
-    <rect x="15" y="15" width="170" height="20" fill="#e94560" rx="4"/>
+  <!-- Document header bar (red accent) -->
+  <rect x="305" y="50" width="210" height="18" fill="#e94560" rx="4"/>
 
-    <!-- H1 heading with # -->
-    <text x="20" y="55" class="md-hash" font-family="monospace" font-size="16" font-weight="bold">#</text>
-    <rect x="40" y="42" width="80" height="12" fill="#343a40" rx="2"/>
-
-    <!-- H2 heading with ## -->
-    <text x="20" y="80" class="md-hash" font-family="monospace" font-size="14" font-weight="bold">##</text>
-    <rect x="55" y="69" width="60" height="10" fill="#6c757d" rx="2"/>
-
+  <!-- Markdown content -->
+  <g fill="#334155">
+    <!-- H1 heading line -->
+    <rect x="305" y="80" width="12" height="14" fill="#e94560"/>
+    <rect x="325" y="82" width="100" height="10" rx="2"/>
+    <!-- H2 heading line -->
+    <rect x="305" y="100" width="12" height="12" fill="#e94560"/>
+    <rect x="325" y="101" width="70" height="9" rx="2"/>
     <!-- Paragraph lines -->
-    <rect x="20" y="95" width="120" height="6" fill="#adb5bd" rx="2"/>
-    <rect x="20" y="107" width="100" height="6" fill="#ced4da" rx="2"/>
-    <rect x="20" y="119" width="140" height="6" fill="#ced4da" rx="2"/>
-
-    <!-- Code block indicator -->
-    <rect x="20" y="132" width="160" height="12" fill="#f1f3f5" rx="2" stroke="#dee2e6"/>
-    <text x="25" y="142" fill="#495057" font-family="monospace" font-size="9">def example():</text>
+    <rect x="305" y="120" width="160" height="5" rx="2"/>
+    <rect x="305" y="132" width="140" height="5" rx="2"/>
+    <rect x="305" y="144" width="180" height="5" rx="2"/>
+    <!-- Code block -->
+    <rect x="305" y="158" width="200" height="24" fill="#1e293b" rx="4"/>
+    <g fill="#94a3b8">
+      <rect x="315" y="167" width="60" height="6" rx="2"/>
+      <rect x="315" y="179" width="40" height="6" rx="2"/>
+    </g>
   </g>
 
-  <!-- Bracket decorations (flowing into document) -->
-  <g transform="translate(230, 60)">
-    <path class="code-bracket" d="M0 0 Q20 50 0 100" opacity="0.6"/>
-  </g>
+  <!-- Bottom accent bar -->
+  <rect x="0" y="210" width="600" height="10" fill="url(#accentGrad)"/>
 
-  <!-- Title and description -->
-  <g transform="translate(300, 175)">
-    <text class="title-text" font-size="28">docsmith</text>
-  </g>
-
-  <g transform="translate(300, 200)">
-    <text class="subtitle-text" font-size="13">Lightweight docstring to Markdown API documentation</text>
-  </g>
-
-  <!-- Accent decoration -->
-  <rect x="0" y="210" width="600" height="10" fill="url(#accentGrad)" rx="0"/>
+  <!-- Title: docsmith -->
+  <text x="300" y="210" font-family="system-ui, -apple-system, sans-serif" font-size="28" font-weight="700" fill="#ffffff" text-anchor="middle">docsmith</text>
 </svg>
